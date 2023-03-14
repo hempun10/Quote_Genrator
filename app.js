@@ -3,10 +3,27 @@ const quoteText = document.querySelector("#quote");
 const quoteAuthor = document.querySelector("#author");
 const twitterBtn = document.querySelector("#twitter");
 const newQuoteBtn = document.querySelector("#new-quote");
+const loader = document.querySelector('#loader')
+
 
 //Setting Up a global Variable of recived Quotes form API
 let apiQuotes = [];
 
+
+
+// show loader 
+const loading =()=>{
+  loader.hidden = false;
+  quoteContainer.hidden = true;
+}
+
+//Loading Complete
+const complete =()=>{
+  if(!loader.hidden){
+    loader.hidden = true
+    quoteContainer.hidden = false
+  }
+}
 //Show New Quote
 const newQuote = () => {
   //Pick a tandom quote from apiQuote Array
@@ -51,10 +68,12 @@ const localQuote = () => {
 
 // Get Quotes From API
 const getQuote = async () => {
+  loading();
   const apiUrl = "https://type.fit/api/quotes";
   try {
     const response = await fetch(apiUrl);
     apiQuotes = await response.json(); //Setting apiQuotes values to response and convert response string to json object
+    complete()
     newQuote(); //Calling a single quote
   } catch (error) {
     //Catch Error Here
@@ -79,3 +98,4 @@ newQuoteBtn.addEventListener('click',()=>{
 twitterBtn.addEventListener('click',tweetQuote)
 //Onload
 getQuote();
+// loading()
