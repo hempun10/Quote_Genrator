@@ -73,6 +73,7 @@ const getQuote = async () => {
   try {
     const response = await fetch(apiUrl);
     apiQuotes = await response.json(); //Setting apiQuotes values to response and convert response string to json object
+    //Stop loader and show quote
     complete()
     newQuote(); //Calling a single quote
   } catch (error) {
