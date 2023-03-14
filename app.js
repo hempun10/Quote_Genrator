@@ -48,6 +48,7 @@ const localQuote = () => {
   // console.log(quote);
   return quote;
 };
+
 // Get Quotes From API
 const getQuote = async () => {
   const apiUrl = "https://type.fit/api/quotes";
